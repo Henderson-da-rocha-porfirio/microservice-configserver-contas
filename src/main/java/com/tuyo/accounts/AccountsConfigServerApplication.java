@@ -1,11 +1,10 @@
 package com.tuyo.accounts;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.boot.*;
+import org.springframework.boot.autoconfigure.*;
+import org.springframework.boot.autoconfigure.domain.*;
+import org.springframework.context.annotation.*;
+import org.springframework.data.jpa.repository.config.*;
 /* 1. @ComponentScan: scaneia todos os beans dentro dos outros pacotes.
 * Como podemos ver, ele scaneia o package controller onde fica definido o Rest Controller.
 * Enquanto a aplicação está subindo, ela está indo e checando todos os packages e identificando todas as anotações e
@@ -21,9 +20,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScans({ @ComponentScan("com.tuyo.accounts.controller") })
 @EnableJpaRepositories("com.tuyo.accounts.repository")
 @EntityScan("com.tuyo.accounts.model")
-public class AccountsDockerizadaApplication {
+public class AccountsConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AccountsDockerizadaApplication.class, args);
+		SpringApplication.run(AccountsConfigServerApplication.class, args);
 	}
 }

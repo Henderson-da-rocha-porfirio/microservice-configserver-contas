@@ -3,24 +3,22 @@
  */
 package com.tuyo.accounts.controller;
 
-import com.tuyo.accounts.model.Accounts;
-import com.tuyo.accounts.model.Customer;
-import com.tuyo.accounts.repository.AccountsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-/**
- * @author Eazy Bytes
- * @Coauthor Tuyo System
- */
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.tuyo.accounts.config.*;
+import com.tuyo.accounts.model.*;
+import com.tuyo.accounts.repository.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AccountsController {
 	
 	@Autowired
 	private AccountsRepository accountsRepository;
+
+	@Autowired
+	AccountsServiceConfig accountsServiceConfig;
 
 	@PostMapping("/myAccount")
 	public Accounts getAccountDetails(@RequestBody Customer customer) {
@@ -32,6 +30,15 @@ public class AccountsController {
 			return null;
 		}
 
+	}
+
+	@GetMapping("/account/properties")
+	public String getPropertyDetails() throws JsonProcessingException {
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		Properties properties = new Properties(accountsServiceConfig.getMsg(), accountsServiceConfig.getBuildVersion(),
+				accountsServiceConfig.getMailDetails(), accountsServiceConfig.getActiveBranches());
+		String jsonStr = ow.writeValueAsString(properties);
+		return jsonStr;
 	}
 
 }
