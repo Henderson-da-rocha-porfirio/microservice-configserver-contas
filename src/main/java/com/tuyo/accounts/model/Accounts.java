@@ -1,13 +1,9 @@
 package com.tuyo.accounts.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.time.*;
 
 /* 1. A framework JPA tratará a classe como um POJO.
 *  2. POJO Plain Old Java Object ou POJO, são objetos Java que seguem um desenho extremamente simplificado.
@@ -24,7 +20,7 @@ dos termos JavaBeans e dos EJB (Enterprise JavaBeans).
 */
 
 @Entity
-@Getter @Setter @ToString
+@Data
 public class Accounts {
 
 	@Column(name = "customer_id")
