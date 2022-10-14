@@ -3,6 +3,7 @@ package com.tuyo.accounts;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.boot.autoconfigure.domain.*;
+import org.springframework.cloud.context.config.annotation.*;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.*;
 /* 1. @ComponentScan: scaneia todos os beans dentro dos outros pacotes.
@@ -14,9 +15,12 @@ import org.springframework.data.jpa.repository.config.*;
 *  3. @EntityScan: sendo o JPA uma framework ORM, e esse sendo usado, é necessário ter o package model ou entity,
 * onde ficarão as entidades(são as classes responsáveis pelas tabelas correspondentes).
 * E esta anotação permitirá o escaneamento .
+* @RefreshScope: Invoca o reload às propriedades(properties) que mudaram sem a necessidade de reiniciar o microserviço.
+* E é preciso inserir também em application.properties: management.endpoints.web.exposure.include=*
 *  */
 
 @SpringBootApplication
+@RefreshScope
 @ComponentScans({ @ComponentScan("com.tuyo.accounts.controller") })
 @EnableJpaRepositories("com.tuyo.accounts.repository")
 @EntityScan("com.tuyo.accounts.model")
