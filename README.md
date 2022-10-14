@@ -47,3 +47,29 @@ http://localhost:8080/account/properties
     ]
 }
 ````
+
+## Necessário criar uma pasta docker-compose, com arquivos docker-compose.yml para cada profile/ambiente: default, dev e prod.
+### Isso permite correr todas as docker image com o ambiente/profile que seja necessário através do docker-compose.yml e subir o docker-compose próximo.
+### Dá um controle total externo das imagens docker, onde é possível passar a atual que será necessária o seu uso.
+### docker-compose.yml( Entendendo o que fica nos Services):
+> a. ports: O Docker sempre dará preferência ao que está no docker-compose.yml. Inclusive as portas. Caso contrário, ele vai procurar as propriedades mencionadas dentro da docker image.
+> 
+> b. networks: esta será compartilhada por todos os serviços. E todos os containers se comunicarão através dela.
+> Devido a isso, o fato de todos os containers correrem em ambientes isolados, os networks farão a ponte entre esses.
+> c. depends on: dependência do serviço que deverá ser iniciado primeiro. Mas assim que ele ligar, os outros serviços
+> também subirão. Para um delay disso verificar abaixo.
+> d. deploy: cria um delay para o que estiver no depends on. Por exemplo, se um microserviço 'dependente' não iniciar,
+> a razão pode ser uma falha ao se conectar no configserver. E se o 'deployment(implantação)' do serviço falhar,
+> pode-se definir uma política de reinício todas as vezes que isso acontecer.
+> e. enviroment: colocar o profile/ambiente que objetiva-se conectar ao configserver. Em 'SPRING_CONFIG_IMPORT',
+> tem que colocar o mesmo nome que é colocado abaixo de services:
+````
+services:
+
+  configserver:
+````
+
+## Para levantar os serviços(precisa ser executado de dentro da pasta docker-compose:
+````
+docker compose up
+````

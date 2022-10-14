@@ -16,7 +16,7 @@
 	<name>accountsconfigserver</name>
 	<description>Contas Config Server</description>
 	<properties>
-		<java.version>14</java.version>
+		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
@@ -71,6 +71,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>hendersonporfirio/${project.artifactId}</name>
+					</image>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
 			</plugin>
 		</plugins>
 	</build>
