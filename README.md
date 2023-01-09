@@ -12,6 +12,21 @@ management.endpoints.web.exposure.include=*
 @Configuration
 @ConfigurationProperties(prefix = "accountsconfigserver")
 ````
+##  public @interface Configuration = @Configuration: Indica que uma classe declara um ou mais métodos @Bean e pode ser processada pelo contêiner Spring para gerar definições de bean e solicitações de serviço para esses beans em tempo de execução, por exemplo:
+````
+@Target ( TYPE )
+@Retention ( RUNTIME )
+@Documented 
+@Component
+@Configuration 
+ public class AppConfig { 
+
+     @Bean 
+     public MyBean myBean() { 
+         // instanciar, configurar e retornar bean que deve ser sempre publico
+     } 
+ }
+ ````
 ## Prestar a atenção para que a leitura do config server(vide classe AccountsServiceConfig) funcione:
 > a. Olhar os nomes das properties, se estão no mesmo nome da aplicação.
 
